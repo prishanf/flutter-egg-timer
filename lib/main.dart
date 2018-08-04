@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:fluttery/framing.dart';
 import './egg_timer_time_display.dart';
-import './egg_timer_button.dart';
 import './egg_timer_controls.dart';
+import './egg_timer_dial.dart';
+
+final Color GRADIANT_TOP = const Color(0xFFF5F5F5);
+final Color GRADIANT_BOTTOM = const Color(0xFFE8E8E8);
 
 void main() => runApp(new MyApp());
 
@@ -28,30 +31,24 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-      body: new Center(
-        child: new Column(
-          children: <Widget>[
-            EggTimerDisplay(),
-            RandomColorBlock(
-              width: double.INFINITY,
-              child: Padding(
-                padding: EdgeInsets.only(
-                  left: 45.0,
-                  right: 45.0,
-                ),
-                child: AspectRatio(
-                  aspectRatio: 1.0,
-                  child: RandomColorBlock(
-                    width: double.INFINITY,
-                  ),
-                ),
+      body: Container(
+        decoration: BoxDecoration(
+            gradient: LinearGradient(
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+          colors: [GRADIANT_TOP, GRADIANT_BOTTOM],
+        )),
+        child: Center(
+          child: Column(
+            children: <Widget>[
+              EggTimerDisplay(),
+              EggTimerDial(),
+              Expanded(
+                child: Container(),
               ),
-            ),
-            Expanded(
-              child: Container(),
-            ),
-            EggtimerControls(),
-          ],
+              EggtimerControls(),
+            ],
+          ),
         ),
       ),
     );
