@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fluttery/framing.dart';
 import './egg_timer_time_display.dart';
+import './egg_timer_button.dart';
 
 void main() => runApp(new MyApp());
 
@@ -52,10 +53,7 @@ class _MyHomePageState extends State<MyHomePage> {
               width: double.INFINITY,
               height: 50.0,
             ),
-            RandomColorBlock(
-              width: double.INFINITY,
-              height: 50.0,
-            ),
+            EggTimerButon(),
           ],
         ),
       ),
