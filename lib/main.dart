@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttery/framing.dart';
 import './egg_timer_time_display.dart';
 import './egg_timer_button.dart';
+import './egg_timer_controls.dart';
 
 void main() => runApp(new MyApp());
 
@@ -35,8 +36,8 @@ class _MyHomePageState extends State<MyHomePage> {
               width: double.INFINITY,
               child: Padding(
                 padding: EdgeInsets.only(
-                  left: 30.0,
-                  right: 30.0,
+                  left: 45.0,
+                  right: 45.0,
                 ),
                 child: AspectRatio(
                   aspectRatio: 1.0,
@@ -49,11 +50,7 @@ class _MyHomePageState extends State<MyHomePage> {
             Expanded(
               child: Container(),
             ),
-            RandomColorBlock(
-              width: double.INFINITY,
-              height: 50.0,
-            ),
-            EggTimerButon(),
+            EggtimerControls(),
           ],
         ),
       ),

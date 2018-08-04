@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
 
 class EggTimerButon extends StatelessWidget {
+final IconData icon;
+final String text;
+
+EggTimerButon({this.icon,this.text});
+
   @override
   Widget build(BuildContext context) {
     return FlatButton(
@@ -14,12 +19,12 @@ class EggTimerButon extends StatelessWidget {
             Padding(
               padding: EdgeInsets.only(right: 3.0),
               child: Icon(
-                Icons.pause,
+                icon,
                 color: Colors.black,
               ),
             ),
             Text(
-              'Pause',
+              text,
               style: const TextStyle(
                 color: Colors.black,
                 fontSize: 20.0,
