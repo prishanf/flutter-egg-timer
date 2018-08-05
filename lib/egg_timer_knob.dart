@@ -74,9 +74,9 @@ class ArrowPainter extends CustomPainter {
 
     canvas.translate(size.width / 2, 0.0);
     Path path = Path();
-    path.moveTo(0.0, -15.0);
-    path.lineTo(15.0, 5.0);
-    path.lineTo(-15.0, 5.0);
+    path.moveTo(0.0, -10.0);
+    path.lineTo(10.0, 5.0);
+    path.lineTo(-10.0, 5.0);
     path.close();
     canvas.drawPath(path, dialArrowPaint);
     canvas.drawShadow(path, Colors.black, 3.0, false);
