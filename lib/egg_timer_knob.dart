@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'dart:math';
 
 final Color GRADIANT_TOP = const Color(0xFFF5F5F5);
 final Color GRADIANT_BOTTOM = const Color(0xFFE8E8E8);
 
 class EggTimerKnob extends StatefulWidget {
+  final rotationPercent;
+  EggTimerKnob({this.rotationPercent});
   @override
   _EggTimerKnobState createState() => _EggTimerKnobState();
 }
@@ -17,7 +20,7 @@ class _EggTimerKnobState extends State<EggTimerKnob> {
           width: double.INFINITY,
           height: double.INFINITY,
           child: CustomPaint(
-            painter: ArrowPainter(),
+            painter: ArrowPainter(rotationPercent:0.03),
           ),
         ),
         Container(
@@ -62,8 +65,9 @@ class _EggTimerKnobState extends State<EggTimerKnob> {
 
 class ArrowPainter extends CustomPainter {
   final Paint dialArrowPaint;
+  final rotationPercent;
 
-  ArrowPainter() : dialArrowPaint = Paint() {
+  ArrowPainter({this.rotationPercent}) : dialArrowPaint = Paint() {
     dialArrowPaint.color = Colors.black;
     dialArrowPaint.style = PaintingStyle.fill;
   }
@@ -72,14 +76,19 @@ class ArrowPainter extends CustomPainter {
   void paint(Canvas canvas, Size size) {
     canvas.save();
 
-    canvas.translate(size.width / 2, 0.0);
-    Path path = Path();
-    path.moveTo(0.0, -10.0);
-    path.lineTo(10.0, 5.0);
-    path.lineTo(-10.0, 5.0);
+    final radius = size.height / 2;
+    canvas.translate(radius, radius);
+    canvas.rotate(2 * PI * rotationPercent);
+
+    Path path = new Path();
+    path.moveTo(0.0, -radius - 10.0);
+    path.lineTo(10.0, -radius + 5.0);
+    path.lineTo(-10.0, -radius + 5.0);
     path.close();
+
     canvas.drawPath(path, dialArrowPaint);
     canvas.drawShadow(path, Colors.black, 3.0, false);
+
     canvas.restore();
   }
 
