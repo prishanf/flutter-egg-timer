@@ -21,6 +21,7 @@ class EggTimerDial extends StatefulWidget {
 }
 
 class _EggTimerDialState extends State<EggTimerDial> {
+  
   _rotationPercent() {
     return widget.currentTime.inSeconds / widget.maxTime.inSeconds; 
   }
@@ -67,7 +68,7 @@ class _EggTimerDialState extends State<EggTimerDial> {
                   Padding(
                     padding: EdgeInsets.all(65.0),
                     child: EggTimerKnob(
-
+                        rotationPercent: _rotationPercent(),
                     ),
                   ),
                 ],

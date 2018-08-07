@@ -20,7 +20,7 @@ class _EggTimerKnobState extends State<EggTimerKnob> {
           width: double.INFINITY,
           height: double.INFINITY,
           child: CustomPaint(
-            painter: ArrowPainter(rotationPercent:0.03),
+            painter: ArrowPainter(rotationPercent: widget.rotationPercent),
           ),
         ),
         Container(
@@ -49,11 +49,15 @@ class _EggTimerKnobState extends State<EggTimerKnob> {
                   width: 1.5,
                 )),
             child: Center(
-              child: Image.network(
-                'https://avatars3.githubusercontent.com/u/14101776?s=400&v=4',
-                width: 50.0,
-                height: 50.0,
-                color: Colors.black,
+              child: Transform(
+                transform: Matrix4.rotationZ(2 * PI * widget.rotationPercent),
+                alignment: Alignment.center,
+                child: Image.network(
+                  'https://avatars3.githubusercontent.com/u/14101776?s=400&v=4',
+                  width: 50.0,
+                  height: 50.0,
+                  color: Colors.black,
+                ),
               ),
             ),
           ),

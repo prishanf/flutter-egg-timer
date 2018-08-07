@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:fluttery/framing.dart';
 import './egg_timer_time_display.dart';
 import './egg_timer_controls.dart';
 import './egg_timer_dial.dart';
+import './egg_timer.dart';
 
 final Color GRADIANT_TOP = const Color(0xFFF5F5F5);
 final Color GRADIANT_BOTTOM = const Color(0xFFE8E8E8);
@@ -28,6 +28,11 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  final EggTimer eggTimer;
+  _MyHomePageState()
+      : eggTimer = new EggTimer(
+          maxTime: const Duration(minutes: 35),
+        );
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
@@ -42,7 +47,11 @@ class _MyHomePageState extends State<MyHomePage> {
           child: Column(
             children: <Widget>[
               EggTimerDisplay(),
-              EggTimerDial(),
+              EggTimerDial(
+                currentTime: eggTimer.currentTime,
+                maxTime: eggTimer.maxTime,
+                ticksPersection: 5,
+              ),
               Expanded(
                 child: Container(),
               ),
