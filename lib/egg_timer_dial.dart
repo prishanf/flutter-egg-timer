@@ -6,7 +6,6 @@ final Color GRADIANT_TOP = const Color(0xFFF5F5F5);
 final Color GRADIANT_BOTTOM = const Color(0xFFE8E8E8);
 
 class EggTimerDial extends StatefulWidget {
-
   final Duration currentTime;
   final Duration maxTime;
   final int ticksPersection;
@@ -21,10 +20,10 @@ class EggTimerDial extends StatefulWidget {
 }
 
 class _EggTimerDialState extends State<EggTimerDial> {
-  
   _rotationPercent() {
-    return widget.currentTime.inSeconds / widget.maxTime.inSeconds; 
+    return widget.currentTime.inSeconds / widget.maxTime.inSeconds;
   }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -61,14 +60,14 @@ class _EggTimerDialState extends State<EggTimerDial> {
                     child: CustomPaint(
                       painter: TickPainter(
                         tickCount: widget.maxTime.inMinutes,
-                        ticksPerSection:  widget.ticksPersection,
+                        ticksPerSection: widget.ticksPersection,
                       ),
                     ),
                   ),
                   Padding(
                     padding: EdgeInsets.all(65.0),
                     child: EggTimerKnob(
-                        rotationPercent: _rotationPercent(),
+                      rotationPercent: _rotationPercent(),
                     ),
                   ),
                 ],
@@ -76,35 +75,6 @@ class _EggTimerDialState extends State<EggTimerDial> {
         ),
       ),
     );
-  }
-}
-
-class ArrowPainter extends CustomPainter {
-  final Paint dialArrowPaint;
-
-  ArrowPainter() : dialArrowPaint = Paint() {
-    dialArrowPaint.color = Colors.black;
-    dialArrowPaint.style = PaintingStyle.fill;
-  }
-
-  @override
-  void paint(Canvas canvas, Size size) {
-    canvas.save();
-
-    canvas.translate(size.width / 2, 0.0);
-    Path path = Path();
-    path.moveTo(0.0, -15.0);
-    path.lineTo(15.0, 5.0);
-    path.lineTo(-15.0, 5.0);
-    path.close();
-    canvas.drawPath(path, dialArrowPaint);
-    canvas.drawShadow(path, Colors.black, 3.0, false);
-    canvas.restore();
-  }
-
-  @override
-  bool shouldRepaint(CustomPainter oldDelegate) {
-    return true;
   }
 }
 
@@ -183,7 +153,7 @@ class TickPainter extends CustomPainter {
             canvas.rotate(PI / 2);
             break;
         }
-    
+
         print(tickPercent);
         print(quadrant);
         textPainter.paint(
