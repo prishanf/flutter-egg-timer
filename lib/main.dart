@@ -33,6 +33,13 @@ class _MyHomePageState extends State<MyHomePage> {
       : eggTimer = new EggTimer(
           maxTime: const Duration(minutes: 35),
         );
+
+  _onTimeSelected(Duration newTime) {
+    setState(() {
+      eggTimer.currentTime = newTime;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
@@ -51,6 +58,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 currentTime: eggTimer.currentTime,
                 maxTime: eggTimer.maxTime,
                 ticksPersection: 5,
+                onTimeSelected: _onTimeSelected,
               ),
               Expanded(
                 child: Container(),
