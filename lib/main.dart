@@ -28,15 +28,31 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  final EggTimer eggTimer;
-  _MyHomePageState()
-      : eggTimer = new EggTimer(
-          maxTime: const Duration(minutes: 35),
-        );
+  EggTimer eggTimer;
+
+  _MyHomePageState() {
+    eggTimer = new EggTimer(
+      maxTime: const Duration(minutes: 35),
+      onTimerUpdate: _onTimerUpdate,
+    );
+  }
 
   _onTimeSelected(Duration newTime) {
     setState(() {
       eggTimer.currentTime = newTime;
+    });
+  }
+
+  _onDialStopTurning(Duration newTime) {
+    setState(() {
+      eggTimer.currentTime = newTime;
+      eggTimer.resume();
+    });
+  }
+
+  _onTimerUpdate() {
+    setState(() {
+          
     });
   }
 
@@ -59,6 +75,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 maxTime: eggTimer.maxTime,
                 ticksPersection: 5,
                 onTimeSelected: _onTimeSelected,
+                onDialStopTurning: _onDialStopTurning,
               ),
               Expanded(
                 child: Container(),

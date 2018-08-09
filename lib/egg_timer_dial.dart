@@ -11,12 +11,14 @@ class EggTimerDial extends StatefulWidget {
   final Duration maxTime;
   final int ticksPersection;
   final Function(Duration) onTimeSelected;
+  final Function(Duration) onDialStopTurning;
 
   EggTimerDial({
     this.currentTime = const Duration(minutes: 0),
     this.maxTime = const Duration(minutes: 35),
     this.ticksPersection = 5,
     this.onTimeSelected,
+    this.onDialStopTurning,
   });
   @override
   _EggTimerDialState createState() => _EggTimerDialState();
@@ -33,6 +35,7 @@ class _EggTimerDialState extends State<EggTimerDial> {
       currentTime: widget.currentTime,
       maxTime: widget.maxTime,
       onTimeSelected: widget.onTimeSelected,
+      onDialStopTurning: widget.onDialStopTurning,
       child: Container(
         width: double.INFINITY,
         child: Padding(
@@ -91,12 +94,14 @@ class DialTurnGuestrureDetector extends StatefulWidget {
   final maxTime;
   final child;
   final Function(Duration) onTimeSelected;
+  final Function(Duration) onDialStopTurning;
 
   DialTurnGuestrureDetector({
     this.child,
     this.currentTime,
     this.maxTime,
     this.onTimeSelected,
+    this.onDialStopTurning,
   });
 
   @override
@@ -107,6 +112,7 @@ class DialTurnGuestrureDetector extends StatefulWidget {
 class _DialTurnGuestrureDetectorState extends State<DialTurnGuestrureDetector> {
   PolarCoord startDragCoord;
   Duration startDragTime;
+  Duration selectedTime;
 
   _onRadialDragStart(PolarCoord coord) {
     startDragCoord = coord;
@@ -119,15 +125,19 @@ class _DialTurnGuestrureDetectorState extends State<DialTurnGuestrureDetector> {
       final anglePercent = angleDiff / (2 * PI);
       final timeDiffInSeconds =
           (anglePercent * widget.maxTime.inSeconds).round();
-      final newTime =
+      selectedTime =
           Duration(seconds: startDragTime.inSeconds + timeDiffInSeconds);
-      print('new time ${newTime.inMinutes}');    
-      widget.onTimeSelected(newTime);
+      print('new time ${selectedTime.inMinutes}');    
+      widget.onTimeSelected(selectedTime);
     }
   }
 
   _onRadialDragEnd() {
+   widget.onDialStopTurning(selectedTime);
+   print('Selected Time $selectedTime');
     startDragCoord = null;
+    startDragTime = null;
+    selectedTime = null;
   }
 
   @override
